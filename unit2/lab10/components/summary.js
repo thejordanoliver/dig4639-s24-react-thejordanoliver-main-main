@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
 const Summary = () => {
   const route = useRoute();
@@ -10,14 +10,17 @@ const Summary = () => {
     let score = 0;
     questionsData.forEach((question) => {
       if (!question.selected) {
-        return; // Skip questions without a selected property
+        return;
       }
-  
-      if (question.type === 'true-false' || question.type === 'multiple-choice') {
+
+      if (
+        question.type === "true-false" ||
+        question.type === "multiple-choice"
+      ) {
         if (question.selected === question.correct) {
           score++;
         }
-      } else if (question.type === 'multiple-answer') {
+      } else if (question.type === "multiple-answer") {
         let isCorrect = question.selected.every((selectedIndex) =>
           question.correct.includes(selectedIndex)
         );
@@ -28,9 +31,6 @@ const Summary = () => {
     });
     return score;
   };
-  
-  
-  
 
   const renderSummary = () => {
     return (
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   totalScore: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   questionContainer: {
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
   },
   correctAnswer: {
     fontSize: 16,
-    fontStyle: 'italic',
-    color: 'green',
+    fontStyle: "italic",
+    color: "green",
   },
 });
 

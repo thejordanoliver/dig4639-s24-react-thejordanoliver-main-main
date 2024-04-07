@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Button, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 
 const Question = ({ navigation, route }) => {
   const { questionsData } = route.params;
@@ -11,27 +11,27 @@ const Question = ({ navigation, route }) => {
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questionsData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedAnswers([]); // Reset selected answers for next question
+      setSelectedAnswers([]);
     } else {
-      navigation.navigate('Summary', { questionsData, selectedAnswers });
+      navigation.navigate("Summary", { questionsData, selectedAnswers });
     }
   };
 
   const handleAnswer = (index) => {
-    if (currentQuestion.type === 'multiple-choice') {
+    if (currentQuestion.type === "multiple-choice") {
       setSelectedAnswers([index]);
-    } else if (currentQuestion.type === 'multiple-answer') {
+    } else if (currentQuestion.type === "multiple-answer") {
       const updatedAnswers = selectedAnswers.includes(index)
         ? selectedAnswers.filter((i) => i !== index)
         : [...selectedAnswers, index];
       setSelectedAnswers(updatedAnswers);
-    } else if (currentQuestion.type === 'true-false') {
+    } else if (currentQuestion.type === "true-false") {
       setSelectedAnswers([index]);
     }
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>{currentQuestion.prompt}</Text>
       {currentQuestion.choices.map((choice, index) => (
         <TouchableOpacity
@@ -41,8 +41,11 @@ const Question = ({ navigation, route }) => {
             padding: 10,
             marginVertical: 10,
             borderRadius: 5,
-            backgroundColor: selectedAnswers.includes(index) ? 'lightblue' : 'white',
-          }}>
+            backgroundColor: selectedAnswers.includes(index)
+              ? "lightblue"
+              : "white",
+          }}
+        >
           <Text>{choice}</Text>
         </TouchableOpacity>
       ))}
@@ -50,6 +53,5 @@ const Question = ({ navigation, route }) => {
     </View>
   );
 };
-
 
 export default Question;
